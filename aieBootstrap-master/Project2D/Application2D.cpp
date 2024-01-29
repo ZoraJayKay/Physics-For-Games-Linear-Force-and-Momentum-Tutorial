@@ -31,7 +31,7 @@ bool Application2D::startup() {
 	m_shipTexture = new aie::Texture("./textures/ship.png");
 
 	m_font = new aie::Font("./font/consolas.ttf", 32);
-	
+
 	m_timer = 0;
 
 	return true;
@@ -39,7 +39,7 @@ bool Application2D::startup() {
 }
 
 void Application2D::shutdown() {
-	
+
 	delete m_font;
 	delete m_texture;
 	delete m_shipTexture;
@@ -53,6 +53,7 @@ void Application2D::update(float deltaTime) {
 
 	aie::Gizmos::clear();
 
+	// The Application's update function calls the upodate function of the PhysicsScene, which in turn calls the update and draw of every actor in the scene.
 	m_physicsScene->update(deltaTime);
 	m_physicsScene->draw();
 
@@ -91,7 +92,7 @@ void Application2D::update(float deltaTime) {
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
 	*/
-	
+
 }
 
 void Application2D::draw() {
@@ -140,7 +141,7 @@ void Application2D::draw() {
 	// draw a slightly rotated sprite with no texture, coloured yellow
 	m_2dRenderer->setRenderColour(1, 1, 0, 1);
 	m_2dRenderer->drawSprite(nullptr, 400, 400, 50, 50, 3.14159f * 0.25f, 1);
-	
+
 	// output some text, uses the last used colour
 	char fps[32];
 	sprintf_s(fps, 32, "FPS: %i", getFPS());
@@ -149,5 +150,5 @@ void Application2D::draw() {
 
 	// done drawing sprites
 	m_2dRenderer->end();
-	*/	
+	*/
 }

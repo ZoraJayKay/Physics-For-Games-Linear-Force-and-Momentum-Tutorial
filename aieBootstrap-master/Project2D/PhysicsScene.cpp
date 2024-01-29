@@ -6,7 +6,7 @@ PhysicsScene::PhysicsScene() {
 	setTimeStep(0.01f);
 
 	// Initialise gravity to (0,0) {0 on x, 0 on y}.
-	setGravity({0,0});
+	setGravity({ 0,0 });
 };
 
 // Destructor
@@ -19,7 +19,7 @@ void PhysicsScene::addActor(PhysicsObject* actor) {
 // Iterate through all of the actors in the vector and if this one is found, remove it and then stop the function.
 void PhysicsScene::removeActor(PhysicsObject* actor) {
 	int temp = 0;
-	
+
 	for (PhysicsObject* _actor : m_actors) {
 		if (_actor == actor) {
 			m_actors.erase(m_actors.begin(), m_actors.begin() + temp);
