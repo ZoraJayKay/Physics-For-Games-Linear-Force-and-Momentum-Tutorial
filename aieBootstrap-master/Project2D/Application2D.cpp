@@ -20,8 +20,25 @@ bool Application2D::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
+	// Initilise a physics scene
 	m_physicsScene = new PhysicsScene();
+	m_physicsScene->setGravity(glm::vec2(0, 0));
 	m_physicsScene->setTimeStep(0.01f);
+
+	// Collision detection between two spheres
+	Sphere* ball1 = new Sphere(glm::vec2(-40,0), glm::vec2(0,0), 4.0f, 1, glm::vec4(1,0,0,1));
+	Sphere* ball2 = new Sphere(glm::vec2(40,0), glm::vec2(0,0), 4.0f, 1, glm::vec4(0,1,0,1));
+	m_physicsScene->addActor(ball1);
+	m_physicsScene->addActor(ball2);
+
+	ball2->applyForceToActor(ball1, { 30,0 });
+	ball1->applyForceToActor(ball2, { -15,0 });
+
+	// Rocket ship test!
+	Sphere* rocket = new Sphere(glm::vec2(0, 0), glm::vec2(0, 0), 4.0f, 1, glm::vec4(0, 0, 1, 1));
+	m_physicsScene->addActor(rocket);
+	//rocket->applyForceToActor(rocket, { 30,0 });
+
 	return true;
 
 	/* STARTER CODE FROM AIE
@@ -41,10 +58,10 @@ bool Application2D::startup() {
 void Application2D::shutdown() {
 
 	delete m_font;
-	delete m_texture;
-	delete m_shipTexture;
+	//delete m_texture;
+	//delete m_shipTexture;
 	delete m_2dRenderer;
-	delete m_physicsScene;
+	delete m_physicsScene;	
 }
 
 void Application2D::update(float deltaTime) {
